@@ -233,12 +233,12 @@
   function productCard(p, i = 0) {
     return `
       <article class="card" data-id="${p.id}" data-aos="fade-up" data-aos-delay="${(i % 4) * 70}">
-        <a class="card-media" href="/product/${p.id}" aria-label="${esc(p.name)}">
+        <a class="card-media" href="product/${p.id}" aria-label="${esc(p.name)}">
           ${img(p.image, p.name)}
           <div class="card-badges">${veg(p.vegeterian ?? p.vegetarian)}${spice(p.spiciness)}</div>
         </a>
         <div class="card-body">
-          <h3 class="card-title"><a href="/product/${p.id}">${esc(p.name)}</a></h3>
+          <h3 class="card-title"><a href="product/${p.id}">${esc(p.name)}</a></h3>
           <p class="card-desc">${esc(p.description)}</p>
           <div class="card-rate">${stars(p.rate)}</div>
           <div class="card-foot">
@@ -262,7 +262,7 @@
   async function addToCart(productId, quantity = 1, btn) {
     if (!App.store.isAuthed) {
       toast('Please sign in to add items to your cart', 'info');
-      App.navigate(`/login?next=${encodeURIComponent(location.pathname + location.search)}`);
+      App.navigate(`/login?next=${encodeURIComponent(App.appPath() + location.search)}`);
       return false;
     }
     btn && (btn.disabled = true);

@@ -56,7 +56,7 @@
 
     const syncUrl = () => {
       const qs = new URLSearchParams(Object.entries(filters).filter(([, v]) => v !== '' && v != null)).toString();
-      history.replaceState(null, '', `/menu${qs ? '?' + qs : ''}`);
+      history.replaceState(null, '', App.url(`/menu${qs ? '?' + qs : ''}`));
       const cat = categories.find((c) => String(c.id) === String(filters.cat));
       App.seo.set({
         title: cat ? `${cat.name} Menu` : 'Menu',

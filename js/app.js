@@ -19,11 +19,11 @@
   ];
 
   App.navigate = (url, { replace = false } = {}) => {
-    history[replace ? 'replaceState' : 'pushState'](null, '', url);
+    history[replace ? 'replaceState' : 'pushState'](null, '', App.url(url));
     return render();
   };
 
-  const currentPath = () => location.pathname.replace(/(.)\/$/, '$1') || '/';
+  const currentPath = () => App.appPath().replace(/(.)\/$/, '$1') || '/';
   const currentQuery = () => Object.fromEntries(new URLSearchParams(location.search));
 
   let cleanup = null;
@@ -45,7 +45,7 @@
 
     if (!route) {
       App.seo.set({ title: 'Page not found', noindex: true });
-      $app.innerHTML = ui.emptyState('Page not found', 'The page you are looking for does not exist.', '<a class="btn btn-primary" href="/">Go home</a>');
+      $app.innerHTML = ui.emptyState('Page not found', 'The page you are looking for does not exist.', '<a class="btn btn-primary" href="./">Go home</a>');
       return;
     }
     if (route.auth && !store.isAuthed) return App.navigate(`/login?next=${encodeURIComponent(path)}`, { replace: true });
@@ -75,16 +75,16 @@
     const name = store.user?.firstName;
     $header.innerHTML = `
       <div class="header-inner">
-        <a class="brand" href="/">${ui.icon('utensils')} Trattoria</a>
+        <a class="brand" href="./">${ui.icon('utensils')} Trattoria</a>
         <button class="nav-toggle" data-action="nav-toggle" aria-label="Toggle menu" aria-expanded="${!!open}"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
         <nav class="nav ${open ? 'open' : ''}" aria-label="Main">
-          <a href="/menu" data-nav="/menu">Menu</a>
+          <a href="menu" data-nav="/menu">Menu</a>
           ${store.isAuthed ? `
-            <a href="/cart" data-nav="/cart" class="cart-link">${ui.icon('bag')} Cart${store.cartCount ? `<span class="count">${store.cartCount}</span>` : ''}</a>
-            <a href="/profile" data-nav="/profile">${ui.icon('user')} ${name ? ui.esc(name) : 'Profile'}</a>
+            <a href="cart" data-nav="/cart" class="cart-link">${ui.icon('bag')} Cart${store.cartCount ? `<span class="count">${store.cartCount}</span>` : ''}</a>
+            <a href="profile" data-nav="/profile">${ui.icon('user')} ${name ? ui.esc(name) : 'Profile'}</a>
             <button class="btn btn-outline btn-sm" data-action="logout">Sign out</button>` : `
-            <a href="/login" data-nav="/login">Sign in</a>
-            <a href="/register" class="btn btn-primary btn-sm">Sign up</a>`}
+            <a href="login" data-nav="/login">Sign in</a>
+            <a href="register" class="btn btn-primary btn-sm">Sign up</a>`}
           <button class="icon-btn" data-action="theme" aria-label="Toggle dark mode">${ui.icon('contrast')}</button>
         </nav>
       </div>`;
@@ -99,11 +99,13 @@
   document.addEventListener('click', (e) => {
     // Client-side navigation for same-origin links.
     const a = e.target.closest('a[href]');
+    // <base> makes '#app' resolve to the home URL, so handle the skip link by hand.
+    if (a?.getAttribute('href') === '#app') { e.preventDefault(); $app.focus(); return; }
     if (a && !e.defaultPrevented && e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) &&
         !a.target && !a.hasAttribute('download') && !a.getAttribute('href').startsWith('#') && a.origin === location.origin) {
       e.preventDefault();
-      const url = a.pathname + a.search;
-      if (url !== location.pathname + location.search) App.navigate(url);
+      const url = a.pathname.slice(App.BASE.length) + a.search;
+      if (url !== App.appPath() + location.search) App.navigate(url);
       $header.querySelector('.nav')?.classList.remove('open');
       return;
     }

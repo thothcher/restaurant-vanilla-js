@@ -10,8 +10,8 @@
             <h1 data-aos="fade-up" data-aos-delay="80">Authentic flavours, ordered in a few taps.</h1>
             <p class="lead" data-aos="fade-up" data-aos-delay="160">Explore our menu, filter by what you love, and have your meal taken care of.</p>
             <div class="hero-actions" data-aos="fade-up" data-aos-delay="240">
-              <a class="btn btn-primary btn-lg" href="/menu">Browse the menu ${ui.icon('arrow')}</a>
-              <a class="btn btn-outline btn-lg" href="/menu?veg=1">${ui.icon('leaf')} Vegetarian picks</a>
+              <a class="btn btn-primary btn-lg" href="menu">Browse the menu ${ui.icon('arrow')}</a>
+              <a class="btn btn-outline btn-lg" href="menu?veg=1">${ui.icon('leaf')} Vegetarian picks</a>
             </div>
           </div>
           <div class="hero-media" id="hero-media" aria-hidden="true">
@@ -32,7 +32,7 @@
       </section>
 
       <section class="container section">
-        <div class="section-head" data-aos="fade-right"><h2 class="section-title">Top rated</h2><a href="/menu" class="more-link">View all ${ui.icon('arrow')}</a></div>
+        <div class="section-head" data-aos="fade-right"><h2 class="section-title">Top rated</h2><a href="menu" class="more-link">View all ${ui.icon('arrow')}</a></div>
         <div class="grid" id="top">${ui.skeletonCards(4)}</div>
       </section>
 
@@ -41,7 +41,7 @@
         <div class="band-content container" data-aos="zoom-in">
           <h2>Hungry already?</h2>
           <p>Your next favourite dish is a couple of clicks away.</p>
-          <a class="btn btn-primary btn-lg" href="/menu">Order now ${ui.icon('arrow')}</a>
+          <a class="btn btn-primary btn-lg" href="menu">Order now ${ui.icon('arrow')}</a>
         </div>
       </section>`;
     App.refreshEffects();
@@ -50,7 +50,7 @@
     if (!root.isConnected) return;
 
     root.querySelector('#cats').innerHTML = cats.status === 'fulfilled'
-      ? cats.value.map((c, i) => `<a class="cat-tile" href="/menu?cat=${c.id}" data-aos="fade-up" data-aos-delay="${i * 60}">${ui.icon(ui.CATEGORY_ICONS[c.name] || 'utensils')}<span>${ui.esc(c.name)}</span></a>`).join('')
+      ? cats.value.map((c, i) => `<a class="cat-tile" href="menu?cat=${c.id}" data-aos="fade-up" data-aos-delay="${i * 60}">${ui.icon(ui.CATEGORY_ICONS[c.name] || 'utensils')}<span>${ui.esc(c.name)}</span></a>`).join('')
       : `<p class="muted">${ui.esc(cats.reason.message)}</p>`;
 
     const topEl = root.querySelector('#top');

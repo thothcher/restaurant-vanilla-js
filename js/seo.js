@@ -11,9 +11,9 @@
   const setMeta = (attr, key, content) => meta(`meta[${attr}="${key}"]`, { tag: 'meta', attrs: { [attr]: key } }).setAttribute('content', content);
 
   App.seo = {
-    set({ title, description = DEFAULT_DESC, path = location.pathname, noindex = false, image, type = 'website', jsonLd } = {}) {
+    set({ title, description = DEFAULT_DESC, path = App.appPath(), noindex = false, image, type = 'website', jsonLd } = {}) {
       const fullTitle = title ? `${title} | ${SITE}` : `${SITE} — Fresh Italian Dishes, Ordered Online`;
-      const url = location.origin + path;
+      const url = location.origin + App.url(path);
       document.title = fullTitle;
       setMeta('name', 'description', description);
       setMeta('name', 'robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large');

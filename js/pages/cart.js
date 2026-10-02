@@ -7,9 +7,9 @@
 
     const itemRow = (it) => `
       <li class="cart-item" data-item="${it.id}">
-        <a class="cart-thumb" href="/product/${it.product.id}">${ui.img(it.product.image, it.product.name)}</a>
+        <a class="cart-thumb" href="product/${it.product.id}">${ui.img(it.product.image, it.product.name)}</a>
         <div class="cart-info">
-          <a class="cart-name" href="/product/${it.product.id}">${ui.esc(it.product.name)}</a>
+          <a class="cart-name" href="product/${it.product.id}">${ui.esc(it.product.name)}</a>
           <span class="muted">${ui.price(it.product.price)} each</span>
         </div>
         <div class="stepper" role="group" aria-label="Quantity of ${ui.esc(it.product.name)}">
@@ -24,7 +24,7 @@
     function draw() {
       const items = cart?.items || [];
       if (!items.length) {
-        root.innerHTML = `<div class="container">${ui.emptyState('Your cart is empty', 'Add a few delicious dishes to get started.', '<a class="btn btn-primary" href="/menu">Browse the menu</a>', 'bag')}</div>`;
+        root.innerHTML = `<div class="container">${ui.emptyState('Your cart is empty', 'Add a few delicious dishes to get started.', '<a class="btn btn-primary" href="menu">Browse the menu</a>', 'bag')}</div>`;
         return;
       }
       const units = items.reduce((n, i) => n + i.quantity, 0);
@@ -39,7 +39,7 @@
               <dl><dt>Items</dt><dd>${units}</dd>
                   <dt class="total">Total</dt><dd class="total">${ui.price(cart.totalPrice || total)}</dd></dl>
               <button class="btn btn-primary btn-lg btn-block" data-checkout>Checkout</button>
-              <a class="link center" href="/menu">Continue shopping</a>
+              <a class="link center" href="menu">Continue shopping</a>
             </aside>
           </div>
         </div>`;
@@ -79,7 +79,7 @@
         if (!ok) return;
         await mutate(() => api.checkout());
         if (!cart.items?.length) {
-          root.innerHTML = `<div class="container">${ui.emptyState('Order placed!', "Thank you — we're preparing your food.", '<a class="btn btn-primary" href="/menu">Order more</a>', 'check-circle')}</div>`;
+          root.innerHTML = `<div class="container">${ui.emptyState('Order placed!', "Thank you — we're preparing your food.", '<a class="btn btn-primary" href="menu">Order more</a>', 'check-circle')}</div>`;
           App.refreshEffects();
         }
       }

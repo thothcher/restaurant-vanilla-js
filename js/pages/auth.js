@@ -17,8 +17,8 @@
     root.innerHTML = shell('Welcome back', 'Sign in to manage your cart and orders.',
       field({ name: 'email', label: 'Email', type: 'email', required: true, autocomplete: 'email', value: query.email }) +
       field({ name: 'password', label: 'Password', type: 'password', required: true, autocomplete: 'current-password' }) +
-      '<a class="link small" href="/forgot">Forgot password?</a>' + submit('Sign in'),
-      'New here? <a href="/register">Create an account</a>');
+      '<a class="link small" href="forgot">Forgot password?</a>' + submit('Sign in'),
+      'New here? <a href="register">Create an account</a>');
 
     bindForm(root.querySelector('#form'), async (v) => {
       const res = await api.login({ email: v.email.trim(), password: v.password });
@@ -41,7 +41,7 @@
       field({ name: 'password', label: 'Password', type: 'password', required: true, autocomplete: 'new-password', rule: 'password' }) +
       field({ name: 'confirm', label: 'Confirm password', type: 'password', required: true, autocomplete: 'new-password', match: 'password' }) +
       submit('Create account'),
-      'Already registered? <a href="/login">Sign in</a>');
+      'Already registered? <a href="login">Sign in</a>');
 
     bindForm(root.querySelector('#form'), async (v) => {
       const email = v.email.trim();
@@ -57,7 +57,7 @@
       field({ name: 'email', label: 'Email', type: 'email', required: true, value: email, autocomplete: 'email' }) +
       field({ name: 'code', label: 'Verification code', required: true, autocomplete: 'one-time-code', extra: 'inputmode="numeric"' }) +
       submit('Verify') + '<button type="button" class="link small" id="resend">Resend code</button>',
-      '<a href="/login">Back to sign in</a>');
+      '<a href="login">Back to sign in</a>');
 
     const form = root.querySelector('#form');
     bindForm(form, async (v) => {
@@ -80,7 +80,7 @@
   App.pages.forgot = ({ root }) => {
     root.innerHTML = shell('Forgot password?', "Enter your email and we'll send a reset code.",
       field({ name: 'email', label: 'Email', type: 'email', required: true, autocomplete: 'email' }) + submit('Send code'),
-      '<a href="/login">Back to sign in</a>');
+      '<a href="login">Back to sign in</a>');
     bindForm(root.querySelector('#form'), async (v) => {
       await api.forgotPassword(v.email.trim());
       toast('If the account exists, a code is on its way', 'success');
@@ -94,7 +94,7 @@
       field({ name: 'newPassword', label: 'New password', type: 'password', required: true, autocomplete: 'new-password', rule: 'password' }) +
       field({ name: 'confirm', label: 'Confirm new password', type: 'password', required: true, autocomplete: 'new-password', match: 'newPassword' }) +
       submit('Reset password'),
-      '<a href="/login">Back to sign in</a>');
+      '<a href="login">Back to sign in</a>');
     bindForm(root.querySelector('#form'), async (v) => {
       await api.resetPassword({ token: v.token.trim(), newPassword: v.newPassword });
       toast('Password updated — please sign in', 'success');

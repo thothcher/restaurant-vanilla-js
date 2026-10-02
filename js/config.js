@@ -8,3 +8,10 @@ window.App = {
   },
   pages: {},
 };
+
+// Sub-path the app is served from: '' locally, '/<repo>' on GitHub Pages (set via <base> in index.html).
+App.BASE = (window.__BASE__ || '/').replace(/\/$/, '');
+/** Real URL for an app path, e.g. url('/menu') -> '/restaurant-vanilla-js/menu'. */
+App.url = (path) => App.BASE + path;
+/** Current app path without the base prefix, e.g. '/menu'. */
+App.appPath = () => location.pathname.slice(App.BASE.length) || '/';

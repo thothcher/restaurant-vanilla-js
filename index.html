@@ -2,22 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>
+    // GitHub Pages: (1) restore the real URL after the 404.html redirect, (2) project sites live under
+    // /<repo>/ while local dev serves from /, so set <base> accordingly. See 404.html and js/config.js.
+    (function (l) {
+      if (l.search[1] === '/') {
+        var d = l.search.slice(1).split('&').map(function (s) { return s.replace(/~and~/g, '&'); }).join('?');
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + d + l.hash);
+      }
+      var base = /\.github\.io$/.test(l.hostname) ? '/' + l.pathname.split('/')[1] + '/' : '/';
+      window.__BASE__ = base;
+      document.write('<base href="' + base + '">');
+    })(window.location);
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Trattoria — Fresh Italian Dishes, Ordered Online</title>
   <meta name="description" content="Browse the Trattoria menu: pizzas, pastas, mains and desserts. Filter by vegetarian, spiciness and price, then order online in a few taps.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#031927">
   <meta name="author" content="Trattoria">
-  <link rel="canonical" href="/">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
   <meta property="og:site_name" content="Trattoria">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Trattoria — Fresh Italian Dishes, Ordered Online">
   <meta property="og:description" content="Browse the Trattoria menu: pizzas, pastas, mains and desserts. Order online in a few taps.">
-  <meta property="og:url" content="/">
-  <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Trattoria — Fresh Italian Dishes, Ordered Online">
   <meta name="twitter:description" content="Browse the Trattoria menu and order online in a few taps.">
 
@@ -28,7 +39,7 @@
     "name": "Trattoria",
     "servesCuisine": "Italian",
     "description": "Pizzas, pastas, mains and desserts, ordered online.",
-    "hasMenu": "/menu",
+    "hasMenu": "https://thothcher.github.io/restaurant-vanilla-js/menu",
     "acceptsReservations": false
   }
   </script>
@@ -38,7 +49,7 @@
   <link rel="preconnect" href="https://restaurantapi.stepacademy.ge" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a class="skip" href="#app">Skip to content</a>
@@ -54,18 +65,18 @@
   <dialog id="dialog" class="dialog"></dialog>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="/js/config.js"></script>
-  <script src="/js/store.js"></script>
-  <script src="/js/api.js"></script>
-  <script src="/js/seo.js"></script>
-  <script src="/js/effects.js"></script>
-  <script src="/js/ui.js"></script>
-  <script src="/js/pages/home.js"></script>
-  <script src="/js/pages/menu.js"></script>
-  <script src="/js/pages/product.js"></script>
-  <script src="/js/pages/cart.js"></script>
-  <script src="/js/pages/auth.js"></script>
-  <script src="/js/pages/profile.js"></script>
-  <script src="/js/app.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/seo.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/menu.js"></script>
+  <script src="js/pages/product.js"></script>
+  <script src="js/pages/cart.js"></script>
+  <script src="js/pages/auth.js"></script>
+  <script src="js/pages/profile.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

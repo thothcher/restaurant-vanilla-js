@@ -11,7 +11,7 @@
       const missing = err.status === 400 || err.status === 404;
       App.seo.set({ title: missing ? 'Dish not found' : 'Error', noindex: true });
       root.innerHTML = `<div class="container">${missing
-        ? ui.emptyState('Dish not found', 'This dish may have been removed.', '<a class="btn btn-primary" href="/menu">Back to menu</a>')
+        ? ui.emptyState('Dish not found', 'This dish may have been removed.', '<a class="btn btn-primary" href="menu">Back to menu</a>')
         : ui.errorState(err)}</div>`;
       root.querySelector('[data-retry]')?.addEventListener('click', () => App.pages.product({ root, params, path }));
       return;
@@ -33,7 +33,7 @@
     let qty = 1;
     root.innerHTML = `
       <div class="container">
-        <nav class="crumbs" aria-label="Breadcrumb"><a href="/menu">Menu</a>${category ? ` / <a href="/menu?cat=${category.id}">${ui.esc(category.name)}</a>` : ''} / <span>${ui.esc(p.name)}</span></nav>
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="menu">Menu</a>${category ? ` / <a href="menu?cat=${category.id}">${ui.esc(category.name)}</a>` : ''} / <span>${ui.esc(p.name)}</span></nav>
         <div class="detail">
           <div class="detail-media" data-aos="fade-right"><div data-parallax="0.06">${ui.img(p.image, p.name, '', true)}</div></div>
           <div class="detail-info" data-aos="fade-left">

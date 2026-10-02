@@ -8,5 +8,4 @@ Disallow: /verify
 Disallow: /forgot
 Disallow: /reset
 
-# TODO: replace with your production domain
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://thothcher.github.io/restaurant-vanilla-js/sitemap.xml
