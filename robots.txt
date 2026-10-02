@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+Disallow: /verify
+Disallow: /forgot
+Disallow: /reset
+
+# TODO: replace with your production domain
+Sitemap: https://example.com/sitemap.xml
