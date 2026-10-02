@@ -232,6 +232,7 @@ input[aria-invalid='true'] { border-color: var(--brick-ember); }
 /* ---------- Misc ---------- */
 .empty { text-align: center; padding: 4rem 1rem; grid-column: 1 / -1; } .empty-ico .icon { width: 3.5rem; height: 3.5rem; color: var(--accent); } .empty p { color: var(--muted); }
 .site-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1.25rem max(1rem, calc((100% - 1180px) / 2)); background: var(--ink-black); border-top: 3px solid var(--brick-ember); color: var(--pale-sky); font-size: .88rem; }
+.site-footer a { color: var(--baby-blue); font-weight: 600; } .site-footer a:hover { color: #fff; }
 
 /* Toasts: top-centre, white card, black text */
 .toasts { position: fixed; top: 1rem; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; flex-direction: column; gap: .6rem; align-items: center; width: min(440px, calc(100vw - 2rem)); pointer-events: none; }
